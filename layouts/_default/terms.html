@@ -1,0 +1,21 @@
+{{ define "body" }}
+<section>
+  <div>
+    <h1 id="title">{{ .Title | humanize | upper}}</h1>
+    {{$term := .Data.Plural }}
+    {{ range $key, $value := (index .Site.Taxonomies $term)}}
+        <div data-class="{{$key | upper}}">
+            <ul>
+            <li>{{ $key | upper }}
+                <ul>
+                {{ range $value.Pages }}
+                    <li><a href="{{ .Permalink }}">{{.Title}}</a></li>
+                {{ end }}
+                </ul>
+            </li>
+            </ul>
+        </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
